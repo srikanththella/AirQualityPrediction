@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Prediction</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        /* Burger Button */
+        .burger-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 30px;
+            color: #fff;
+            z-index: 10;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 20px;
+            margin: 40px auto;
+            width: 50%; /* Initial width */
+            transition: width 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        /* Info Section */
+        .info-section {
+            flex: 1;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            transition: display 0.3s ease-in-out;
+        }
+
+        .info-section.show {
+            display: block;
+        }
+
+        .info-section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .info-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Form Container */
+        .form-container {
+            flex: 1;
+            padding: 30px;
+            background: #fff;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-container h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: -30px -30px 20px -30px;
+            padding: 20px 30px;
+            background-color: #4CAF50;
+            border-radius: 12px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Burger Button -->
+    <button class="burger-button" onclick="toggleInfo()">&#9432;</button>
+
+    <!-- Header Section -->
+    <div class="header">
+        Welcome to the Air Quality Prediction Portal
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container" id="mainContainer">
+        <!-- Left Section (Information) -->
+        <div class="info-section" id="infoSection">
+            <h2>Why Predict Air Quality?</h2>
+            <p>
+                Monitoring air quality is essential for maintaining a healthy lifestyle. 
+                Predicting air quality helps in identifying harmful pollutants and 
+                taking necessary measures to improve environmental conditions.
+            </p>
+            <h2>Input Guidelines</h2>
+            <p>Please provide the following inputs to predict air quality:</p>
+            <ul>
+                <li><strong>Temperature (°C):</strong> Enter the current temperature in Celsius.</li>
+                <li><strong>NO2 (ppb):</strong> Provide the Nitrogen Dioxide concentration in parts per billion.</li>
+                <li><strong>SO2 (ppb):</strong> Enter the Sulfur Dioxide concentration in parts per billion.</li>
+                <li><strong>CO (ppm):</strong> Input the Carbon Monoxide concentration in parts per million.</li>
+                <li><strong>Proximity to Road (KM):</strong> Specify the distance to the nearest road in kilometers.</li>
+            </ul>
+        </div>
+
+        <!-- Right Section (Form) -->
+        <div class="form-container">
+            <h2>Air Quality Prediction</h2>
+            <form action="/predict" method="post">
+                <label for="Temperature">Temperature (°C):</label>
+                <input type="number" step="any" name="Temperature" required>
+
+                <label for="NO2">NO2 (ppb):</label>
+                <input type="number" step="any" name="NO2" required>
+
+                <label for="SO2">SO2 (ppb):</label>
+                <input type="number" step="any" name="SO2" required>
+
+                <label for="CO">CO (ppm):</label>
+                <input type="number" step="any" name="CO" required>
+
+                <label for="Proximity">Proximity to Road (KM):</label>
+                <input type="number" step="any" name="Proximity" required>
+
+                <input type="submit" value="Predict Air Quality">
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        &copy; 2025 Air Quality Prediction. All Rights Reserved. | Contact Us: info@airquality.com
+    </div>
+
+    <!-- JavaScript for Burger Button -->
+    <script>
+        function toggleInfo() {
+            var infoSection = document.getElementById("infoSection");
+            var mainContainer = document.getElementById("mainContainer");
+
+            infoSection.classList.toggle("show");
+
+            // Adjust the container width when info is toggled
+            if (infoSection.classList.contains("show")) {
+                mainContainer.style.width = "90%"; // Expand width
+            } else {
+                mainContainer.style.width = "50%"; // Shrink width
+            }
+        }
+    </script>
+</body>
+</html>
