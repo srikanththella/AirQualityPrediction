@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background */
+            color: #333;
+            
+        }
+
+        /* Result Container */
+        .result-container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-color: #fff; /* White background */
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Result Header */
+        .result-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        /* Success or Danger Message Styling */
+        .result-message {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Good Air Quality Styling */
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        /* Poor Air Quality Styling */
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Icons */
+        .result-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .result-icon-good {
+            color: #4CAF50;
+        }
+
+        .result-icon-poor {
+            color: #FF5722;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Fade-In Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="result-container">
+                    <h2>Air Quality Prediction Result</h2>
+                    {% if prediction_text == 'Good' %}
+                        <div class="alert alert-success result-message">
+                            <div class="result-icon result-icon-good">😊</div>
+                            <h3>Great News!</h3>
+                            <p>The air quality is good. Enjoy the fresh air and have a wonderful day!</p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger result-message">
+                            <div class="result-icon result-icon-poor">😷</div>
+                            <h3>Caution!</h3>
+                            <p>The air quality is poor. Please stay indoors and take necessary precautions.</p>
+                        </div>
+                    {% endif %}
+                    <!-- Back Button -->
+                    <a href="{{ url_for('home') }}" class="back-button">Back to Form</a>
+                    <br><br>
+                    <div class="info">
+                        <p>Learn more about air quality and its impact on your health.</p>
+                        <a href="https://www.aqi.in/dashboard/india/telangana/hyderabad" target="_blank">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
