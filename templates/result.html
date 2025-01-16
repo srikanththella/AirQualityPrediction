@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Body Styling */
+
+        /*------------------*/
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -35,7 +37,15 @@
         .result-container h2 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #4CAF50;
+            /* color: #4CAF50; */
+        }
+
+        .good-result{
+            color: #4CAF50
+        }
+
+        .poor-result{
+            color: #FF5722
         }
 
         /* Success or Danger Message Styling */
@@ -87,7 +97,9 @@
         }
 
         .back-button:hover {
-            background-color: #45a049;
+            background-color: #1c6e20;
+            text-decoration: none;
+            color: #fff;
         }
 
         /* Fade-In Animation */
@@ -101,6 +113,8 @@
                 transform: translateY(0);
             }
         }
+
+        
     </style>
 </head>
 <body>
@@ -108,18 +122,20 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="result-container">
-                    <h2>Air Quality Prediction Result</h2>
+                    <h2 class="{% if prediction_text == 'Good' %}good-result{% else %}poor-result{% endif %}">Air Quality Prediction Result</h2>
                     {% if prediction_text == 'Good' %}
                         <div class="alert alert-success result-message">
                             <div class="result-icon result-icon-good">😊</div>
                             <h3>Great News!</h3>
                             <p>The air quality is good. Enjoy the fresh air and have a wonderful day!</p>
+                            
                         </div>
                     {% else %}
                         <div class="alert alert-danger result-message">
                             <div class="result-icon result-icon-poor">😷</div>
                             <h3>Caution!</h3>
                             <p>The air quality is poor. Please stay indoors and take necessary precautions.</p>
+                            
                         </div>
                     {% endif %}
                     <!-- Back Button -->
